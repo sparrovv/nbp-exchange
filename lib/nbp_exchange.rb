@@ -7,6 +7,7 @@ require 'nbp_exchange/currency_nodes'
 require 'nbp_exchange/currency_xml'
 
 module NbpExchange
-  class WrongDate < ArgumentError;end
-  class NotFoun < RuntimeError;end
+  class InvalidDate < ArgumentError;end
+  class RateNotFound < RuntimeError;end
+  class NoXMLForThisDate < RuntimeError;end
 end

@@ -17,7 +17,7 @@ module NbpExchange
       page = open(dir_url)
       doc = Nokogiri::HTML(page.read)
       name = doc.text[/^#{@date.to_s}.+/][/(\w+.xml)/, 1]
-      raise XmlDoesNotExists if name.nil? || name.empty?
+      raise NoXMLForThisDate if name.nil? || name.empty?
       name
     end
 

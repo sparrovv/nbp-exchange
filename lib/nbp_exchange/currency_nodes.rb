@@ -9,9 +9,7 @@ module NbpExchange
 
     def find(symbol)
       node = nodes.xpath("//pozycja[kod_waluty='#{symbol.upcase}']")
-
-      raise NotFound if node.empty?
-
+      raise RateNotFound if node.empty?
       node
     end
 
@@ -23,11 +21,8 @@ module NbpExchange
 
     def load_nodes
       doc = Nokogiri::XML(@xml.open_xml)
-
       pub_date= doc.xpath('tabela_kursow/data_publikacji').text
-      puts pub_date
-
-      raise WrongDate unless valid?(pub_date)
+      raise InvalidDate unless valid?(pub_date)
 
       doc.xpath('tabela_kursow/pozycja')
     end
