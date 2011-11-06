@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Michal Wrobel"]
   s.email       = ["sparrovv@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Get averange exchange rate for PLN zloty, with specific date}
-  s.description = %q{This is wrapper to NBP exchange rates}
+  s.summary     = %q{NBP average exchange rates for PLN}
+  s.description = %q{Get average exchange rate for PLN polski zloty from specific date. This lib wraps http://rss.nbp.pl/kursy/xml2/2011/a/dir.aspx site. }
 
   s.rubyforge_project = "nbp_exchange"
 
