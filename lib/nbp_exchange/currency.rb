@@ -4,7 +4,11 @@ module NbpExchange
   class Currency
     CurrencieNames = {
       'eur' => 'Euro',
-      'usd' => 'Dolar amerykański'
+      'usd' => 'Dolar amerykański',
+      'chf' => 'Frank szwajcarski',
+      'gbp' => 'Funt szterling',
+      'czk' => 'Korona czeska',
+      'jpy' => 'jen (Japonia)'
     }
 
     attr_reader :symbol
@@ -18,7 +22,7 @@ module NbpExchange
     end
 
     def rate(date)
-      @rate ||= load_rate(date)
+      @rate = load_rate(date)
     end
 
     def self.available_currency_keys
