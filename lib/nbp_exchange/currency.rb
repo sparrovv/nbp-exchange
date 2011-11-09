@@ -2,7 +2,7 @@
 module NbpExchange
 
   class Currency
-    CurrencNames = {
+    SymbolsNames = {
       'eur' => 'Euro',
       'usd' => 'Dolar amerykański',
       'chf' => 'Frank szwajcarski',
