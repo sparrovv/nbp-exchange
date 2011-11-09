@@ -18,7 +18,7 @@ module NbpExchange
     end
 
     def name
-      @name ||= CurrencieNames[symbol]
+      @name ||= SymbolsNames[symbol]
     end
 
     def rate(date)
