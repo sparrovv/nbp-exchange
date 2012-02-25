@@ -11,7 +11,8 @@ module NbpExchange
       'jpy' => 'jen (Japonia)'
     }
 
-    attr_reader :symbol, :date
+    attr_reader :symbol
+    attr_reader :date
 
     def initialize(symbol)
       @symbol = symbol.downcase
@@ -32,8 +33,8 @@ module NbpExchange
     private
 
     def load_rate(date)
-      date = date.is_a?(String) ? Date.parse(date) : date 
-      date = get_valid_date(date) unless NbpExchange::GetRateFromLastWorkingDay
+      date = date.is_a?(String) ? Date.parse(date) : date
+      date = get_valid_date(date) if NbpExchange::Config::get_rate_from_last_working_date
       cn = CurrencyNodes.new(date)
       raw_rate = cn.find(symbol)
       Rate.parse(self, date, raw_rate)
