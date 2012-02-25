@@ -23,10 +23,27 @@ module NbpExchange
 
       context "when rate doesn't exists for this date" do
 
-        it "should raise error" do
+        it "should raise error by default" do
           lambda {
             r = currency.rate("2001-01-01")
           }.should raise_error(NbpExchange::NoXMLForThisDate)
+        end
+
+        context "module is configured to get last possible rate" do
+
+          it "should have property to set options to gather rate from last working day" do
+            NbpExchange::GetRateFromLastWorkingDay.should_not be_nil
+          end
+
+          it "should get last rate from the last working day" do
+            r = nil
+            lambda {
+              r = currency.rate("2012-02-25")
+            }.should_not raise_error
+
+            r.date.should == Date.parse("2012-02-24")
+          end
+
         end
 
       end
