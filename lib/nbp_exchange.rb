@@ -7,6 +7,8 @@ require 'nbp_exchange/currency_nodes'
 require 'nbp_exchange/currency_xml'
 
 module NbpExchange
+  GetRateFromLastWorkingDay = false
+
   class InvalidDate < ArgumentError;end
   class RateNotFound < RuntimeError;end
   class NoXMLForThisDate < RuntimeError;end
