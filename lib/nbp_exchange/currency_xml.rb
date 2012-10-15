@@ -14,14 +14,15 @@ module NbpExchange
     end
 
     def xml_name
-      page = open(dir_url)
-      doc = Nokogiri::HTML(page.read)
+      list = open('http://nbp.pl/kursy/xml/dir.txt').read
+      list.each_line do |item|
+        if /a([0-9]+)z#{@date.strftime '%y%m%d'}/.match(item)
+          name = @date.strftime '%y' + item[0, 4] + '.xml'
+          return name
+        end
+      end
 
-      date_row = doc.text[/#{@date.to_s}.+/]
-      name = date_row ? date_row[/(\w+.xml)/, 1] : nil
-
-      raise NoXMLForThisDate if name.nil? || name.empty?
-      name
+      raise NoXMLForThisDate
     end
 
     def xml_url
