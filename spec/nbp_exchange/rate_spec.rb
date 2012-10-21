@@ -8,6 +8,7 @@ module NbpExchange
 
     describe ".parse" do
       it "should parse rate from xml object" do
+
       end
     end
   end

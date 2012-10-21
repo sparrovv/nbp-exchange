@@ -1,6 +1,5 @@
 #encoding: utf-8
 module NbpExchange
-
   class Currency
     SymbolsNames = {
       'eur' => 'Euro',
@@ -8,7 +7,7 @@ module NbpExchange
       'chf' => 'Frank szwajcarski',
       'gbp' => 'Funt szterling',
       'czk' => 'Korona czeska',
-      'jpy' => 'jen (Japonia)'
+      'jpy' => 'Jen (Japonia)'
     }
 
     attr_reader :symbol
@@ -38,5 +37,4 @@ module NbpExchange
       Rate.parse(self, date, raw_rate)
     end
   end
-
 end

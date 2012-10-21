@@ -1,7 +1,5 @@
 module NbpExchange
-
   class CurrencyNodes
-
     def initialize(date)
       @date = date
       @xml = CurrencyXml.new(@date)
@@ -32,5 +30,4 @@ module NbpExchange
     end
 
   end
-
 end

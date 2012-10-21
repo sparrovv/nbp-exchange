@@ -1,7 +1,5 @@
 module NbpExchange
-
   class Rate
-
     attr_reader :currency
     attr_reader :date
     attr_reader :average_exchange_rate
