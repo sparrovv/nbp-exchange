@@ -4,16 +4,20 @@ module NbpExchange
     attr_reader :date
     attr_reader :average_exchange_rate
 
-    def initialize(currency, date, aer)
+    def initialize(currency, date, average_exchange_rate)
       @date = date
       @currency = currency
-      @average_exchange_rate = aer
+      @average_exchange_rate = average_exchange_rate
     end
 
-    def self.parse(currency, date, raw)
-      aer = raw.xpath("kurs_sredni").text
-      aer = aer.gsub(',','.').to_f
-      Rate.new(currency, date, aer)
+    def self.build(currency, date)
+      cn = CurrencyNodes.new(date)
+      raw_rate = cn.find(currency.symbol)
+
+      average_rate = raw_rate.
+        xpath("kurs_sredni").text.gsub(',','.').to_f
+
+      Rate.new(currency, date, average_rate)
     end
 
   end

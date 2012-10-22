@@ -32,9 +32,7 @@ module NbpExchange
 
     def load_rate(date)
       date = (date.is_a?(String)) ? Date.parse(date) : date
-      cn = CurrencyNodes.new(date)
-      raw_rate = cn.find(symbol)
-      Rate.parse(self, date, raw_rate)
+      Rate.build(self, date)
     end
   end
 end
