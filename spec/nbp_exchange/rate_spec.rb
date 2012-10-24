@@ -1,12 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 module NbpExchange
-
   describe Rate do
-    let(:currency){ Currency.new(CURRENCY_SYMBOL) }
-    let(:rate){ Rate.new(currency, EXCHANGE_DATE, 12) }
-    let(:file_path){ File.expand_path '../../12a204.xml'}
-    let(:raw_xml){ File.read(file_path) }
+    let(:currency) { stub('Currency') }
+    let(:rate){ Rate.new(currency, EXCHANGE_DATE, '12,12') }
 
     it 'has date' do
       rate.date.should == EXCHANGE_DATE
@@ -16,14 +13,13 @@ module NbpExchange
       rate.currency.should == currency
     end
 
-    it 'has average_exchange_rate' do
-      rate.average_exchange_rate.should == 12
+    it 'has average_exchange_rate in float' do
+      rate.average_exchange_rate.should == 12.12
     end
 
-    describe ".build" do
-      it "creates rate from given currency and date" do
-
-      end
+    it 'can pass numeric as average_exchange_rate' do
+      rate = Rate.new(currency, EXCHANGE_DATE, 12.11)
+      rate.average_exchange_rate.should == 12.11
     end
   end
 end

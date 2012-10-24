@@ -14,6 +14,7 @@ module NbpExchange
 
     def initialize(symbol)
       @symbol = symbol.downcase
+      @rates = {}
     end
 
     def name
@@ -21,7 +22,12 @@ module NbpExchange
     end
 
     def rate(date)
-      @rate = load_rate(date)
+      @rates[date] ||= load_rate(date)
+    end
+    alias :rate_at :rate
+
+    def last_available_rate_for(date)
+      @rates[date] ||= load_rate(date, true)
     end
 
     def self.available_currency_keys
@@ -29,10 +35,16 @@ module NbpExchange
     end
 
     private
+    def rate_builder
+      @rate_builder ||= RateBuilder.new(self)
+    end
 
-    def load_rate(date)
-      date = (date.is_a?(String)) ? Date.parse(date) : date
-      Rate.build(self, date)
+    def load_rate(date, reverse_search=false)
+      if reverse_search
+        rate_builder.build_with_reverse_search(date)
+      else
+        rate_builder.build(date)
+      end
     end
   end
 end

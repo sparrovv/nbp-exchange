@@ -3,7 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 module NbpExchange
   describe Currency do
 
-    let!(:currency){ Currency.new(CURRENCY_SYMBOL) }
+    let(:currency){ Currency.new(CURRENCY_SYMBOL) }
+    let(:date) { Date.new(2012, 1, 1) }
 
     describe "#name" do
       it "shoud have name" do
@@ -12,21 +13,30 @@ module NbpExchange
     end
 
     describe "#rate" do
-      context "When rate exists" do
-        let(:expected){ Rate.new(currency, EXCHANGE_DATE, 4.4146) }
-
-        it "should return average rate for given date" do
-          r = currency.rate(EXCHANGE_DATE)
-          r.average_exchange_rate.should == expected.average_exchange_rate
-        end
+      it "calls rate builder" do
+        currency.should_receive(:load_rate).with(date) { stub }
+        currency.rate(date)
       end
 
-      context "when rate doesn't exists for this date" do
-        it "should raise error" do
-          lambda {
-            r = currency.rate("2001-01-01")
-          }.should raise_error(NbpExchange::NoXMLForThisDate)
-        end
+      it 'doesn\'t call rate builder twice' do
+        currency.should_receive(:load_rate).with(date) { stub('first') }
+        currency.rate(date)
+        currency.should_not_receive(:load_rate).with(date)
+        currency.rate(date)
+      end
+    end
+
+    describe "#rate_at" do
+      it "calls rate builder" do
+        currency.should_receive(:load_rate).with(date) { stub }
+        currency.rate_at(date)
+      end
+    end
+
+    describe "#last_available_rate_for" do
+      it "calls load_rate" do
+        currency.should_receive(:load_rate).with(date, true) { stub }
+        currency.last_available_rate_for(date)
       end
     end
   end
