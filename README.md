@@ -9,9 +9,9 @@ It supports dates from 2011-08-01
 ##Usage:
 
 ```
-  currency = NbpExhchange::Currency.new('usd')
+  currency = NbpExchange::Currency.new('usd')
 
   rate = currency.rate(Date.parse("2011-11-02"))
-  rate.average_currency_rate
+  rate.average_exchange_rate
 ```
 
