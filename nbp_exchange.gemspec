@@ -21,7 +21,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('nokogiri')
 
-  s.add_development_dependency('rspec')
-  s.add_development_dependency('vcr')
-  s.add_development_dependency('fakeweb')
+  s.add_development_dependency('rspec', '~> 3.1')
 end

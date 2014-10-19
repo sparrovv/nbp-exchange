@@ -9,7 +9,7 @@ describe 'Currency rate' do
       let(:date) { Date.parse("2012-10-19") }
 
       it 'returns rate for given date' do
-        currency.rate(date).average_exchange_rate.should == 4.1103
+        expect(currency.rate(date).average_exchange_rate).to eq 4.1103
       end
     end
 
@@ -17,7 +17,7 @@ describe 'Currency rate' do
       let(:date) { Date.parse("2012-09-25") }
 
       it 'returns rate for given date' do
-        currency.rate(date).average_exchange_rate.should == 4.1475
+        expect(currency.rate(date).average_exchange_rate).to eq 4.1475
       end
     end
   end
